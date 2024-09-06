@@ -1,24 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://c17yhf6jkkgaw"]
+[gd_scene load_steps=8 format=4 uid="uid://c17yhf6jkkgaw"]
 
 [ext_resource type="Script" path="res://scenes/battle/battle.gd" id="1_3svu6"]
+[ext_resource type="Texture2D" uid="uid://bigcujb6hu1du" path="res://assets/128x128Purple.png" id="2_hmvep"]
+[ext_resource type="PackedScene" uid="uid://dnxjoc6ucoi4o" path="res://controllers/tile_controller.tscn" id="2_kp1bt"]
+[ext_resource type="Texture2D" uid="uid://y3awoqs2hp6y" path="res://assets/128x128BoxCursor.png" id="3_q70qf"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_taua1"]
+texture = ExtResource("2_hmvep")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qgmjy"]
+texture = ExtResource("3_q70qf")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_31xrg"]
+tile_size = Vector2i(128, 128)
+sources/1 = SubResource("TileSetAtlasSource_taua1")
+sources/2 = SubResource("TileSetAtlasSource_qgmjy")
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_3svu6")
 
+[node name="TileController" parent="." node_paths=PackedStringArray("ground_layer", "mouse_layer") instance=ExtResource("2_kp1bt")]
+ground_layer = NodePath("../GroundTileMapLayer")
+mouse_layer = NodePath("../MouseTileMapLayer")
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -29.0
-offset_right = 60.0
-offset_bottom = 29.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -573.0
+offset_bottom = 167.0
+grow_horizontal = 0
 
 [node name="Label" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
@@ -30,3 +47,13 @@ vertical_alignment = 1
 [node name="Button" type="Button" parent="UI/VBoxContainer"]
 layout_mode = 2
 text = "Return to Map"
+
+[node name="GroundTileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(751, 635)
+tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAAAAAAAAAQAAAAAAAAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAABAP7/AQAAAAAAAAAAAP7/AQAAAAAAAAD///7/AQAAAAAAAAD+////AQAAAAAAAAD+//7/AQAAAAAAAAD+/wAAAQAAAAAAAAABAAAAAQAAAAAAAAD+/wEAAQAAAAAAAAD//wEAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAACAP7/AQAAAAAAAAADAP7/AQAAAAAAAAADAP//AQAAAAAAAAACAP//AQAAAAAAAAACAAAAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAAAAQAAAAAAAAACAAIAAQAAAAAAAAABAAIAAQAAAAAAAAAAAAIAAQAAAAAAAAD//wIAAQAAAAAAAAD+/wIAAQAAAAAAAAD9//7/AQAAAAAAAAD9////AQAAAAAAAAD9/wAAAQAAAAAAAAD9/wEAAQAAAAAAAAD9/wIAAQAAAAAAAAD8//7/AQAAAAAAAAD8////AQAAAAAAAAD8/wAAAQAAAAAAAAD8/wEAAQAAAAAAAAD8/wIAAQAAAAAAAAD8//3/AQAAAAAAAAD9//3/AQAAAAAAAAD+//3/AQAAAAAAAAD///3/AQAAAAAAAAAAAP3/AQAAAAAAAAABAP3/AQAAAAAAAAACAP3/AQAAAAAAAAADAP3/AQAAAAAAAAA=")
+tile_set = SubResource("TileSet_31xrg")
+
+[node name="MouseTileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(751, 635)
+tile_map_data = PackedByteArray("AAAAAP//AgAAAAAAAAA=")
+tile_set = SubResource("TileSet_31xrg")
