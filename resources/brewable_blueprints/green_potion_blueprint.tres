@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="BrewableBlueprints" load_steps=6 format=3 uid="uid://bh1cdi4vaytqr"]
+
+[ext_resource type="Script" path="res://resources/brewable_blueprints/blueprint_cost_data.gd" id="1_qy7vc"]
+[ext_resource type="Script" path="res://resources/brewable_blueprints/brewable_blueprint.gd" id="2_1xc0a"]
+
+[sub_resource type="Resource" id="Resource_vtq7u"]
+script = ExtResource("1_qy7vc")
+item_key = 0
+amount = 1
+
+[sub_resource type="Resource" id="Resource_nvuvq"]
+script = ExtResource("1_qy7vc")
+item_key = 2
+amount = 1
+
+[sub_resource type="Resource" id="Resource_kjiyb"]
+script = ExtResource("1_qy7vc")
+item_key = 3
+amount = 1
+
+[resource]
+script = ExtResource("2_1xc0a")
+item_key = 5
+costs = Array[ExtResource("1_qy7vc")]([SubResource("Resource_vtq7u"), SubResource("Resource_nvuvq"), SubResource("Resource_kjiyb")])

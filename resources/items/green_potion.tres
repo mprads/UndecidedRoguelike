@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Items" load_steps=2 format=3 uid="uid://s7h4jcp3woqn"]
+
+[ext_resource type="Script" path="res://resources/items/item.gd" id="1_pjb3t"]
+
+[resource]
+script = ExtResource("1_pjb3t")
+item_key = 5
+display_name = "Green Potion"
+is_brewable = true

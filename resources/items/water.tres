@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Items" load_steps=2 format=3 uid="uid://4stm3cpno34x"]
+
+[ext_resource type="Script" path="res://resources/items/item.gd" id="1_xlk4h"]
+
+[resource]
+script = ExtResource("1_xlk4h")
+item_key = 0
+display_name = "Water"
+is_brewable = false
