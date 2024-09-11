@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="UnitPool" load_steps=4 format=3 uid="uid://5isisnr3hxnd"]
+
+[ext_resource type="Script" path="res://resources/unit_pools/unit_pool.gd" id="1_d0y5v"]
+[ext_resource type="Script" path="res://resources/units/unit_stats.gd" id="2_14d45"]
+[ext_resource type="Resource" uid="uid://dgxi5obo1gti8" path="res://resources/units/round_potion.tres" id="3_1msni"]
+
+[resource]
+script = ExtResource("1_d0y5v")
+units = Array[ExtResource("2_14d45")]([ExtResource("3_1msni"), ExtResource("3_1msni"), ExtResource("3_1msni")])

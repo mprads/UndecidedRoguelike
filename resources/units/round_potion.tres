@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://dgxi5obo1gti8"]
+
+[ext_resource type="Texture2D" uid="uid://c7e2ip0i6xnvk" path="res://assets/art/characters/BasePotion.png" id="1_gg7n1"]
+[ext_resource type="Script" path="res://resources/units/unit_stats.gd" id="2_nubil"]
+
+[resource]
+script = ExtResource("2_nubil")
+name = "Round Potion"
+max_liquid = 100
+max_health = 20
+base_movement = 5
+art = ExtResource("1_gg7n1")

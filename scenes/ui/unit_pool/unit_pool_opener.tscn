@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5rn0htifxlfx"]
+
+[ext_resource type="Script" path="res://scenes/ui/unit_pool/unit_pool_opener.gd" id="1_22dmt"]
+
+[node name="UnitPoolOpener" type="TextureButton"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_22dmt")
