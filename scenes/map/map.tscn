@@ -42,3 +42,8 @@ text = "Go to Battle Reward
 layout_mode = 2
 text = "Go to Shop
 "
+
+[node name="BrewingButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Go to Brewing
+"

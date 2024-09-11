@@ -43,6 +43,8 @@ func _on_map_exited(room_name: String) -> void:
 			_on_battle_reward_entered()
 		'shop':
 			_on_shop_entered()
+		'brewing':
+			_on_brewing_entered()
 
 
 func _on_battle_entered() -> void:
@@ -54,4 +56,8 @@ func _on_battle_reward_entered() -> void:
 
 
 func _on_shop_entered() -> void:
+	_change_view(SHOP_SCENE)
+
+
+func _on_brewing_entered() -> void:
 	_change_view(SHOP_SCENE)
