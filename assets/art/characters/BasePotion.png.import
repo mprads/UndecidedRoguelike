@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y3awoqs2hp6y"
-path="res://.godot/imported/128x128BoxCursor.png-e6de9c9e1a258345a255e326b94a41b4.ctex"
+uid="uid://c7e2ip0i6xnvk"
+path="res://.godot/imported/BasePotion.png-db6e5fa428642da2c129ecbeb278dc0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/128x128BoxCursor.png"
-dest_files=["res://.godot/imported/128x128BoxCursor.png-e6de9c9e1a258345a255e326b94a41b4.ctex"]
+source_file="res://assets/art/characters/BasePotion.png"
+dest_files=["res://.godot/imported/BasePotion.png-db6e5fa428642da2c129ecbeb278dc0d.ctex"]
 
 [params]
 

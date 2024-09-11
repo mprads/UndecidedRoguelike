@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="UnitPool" load_steps=3 format=3 uid="uid://c3jrwoyob6s72"]
+
+[ext_resource type="Script" path="res://resources/unit_pools/unit_pool.gd" id="1_dy273"]
+[ext_resource type="Script" path="res://resources/units/unit_stats.gd" id="2_eua70"]
+
+[resource]
+script = ExtResource("1_dy273")
+unit_pool = Array[ExtResource("2_eua70")]([])
