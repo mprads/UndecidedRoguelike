@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://ign1nfuln6yc"]
+
+[node name="UnitPool" type="Node2D"]
+position = Vector2(273, 81)

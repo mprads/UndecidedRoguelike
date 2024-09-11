@@ -1,10 +1,17 @@
-[gd_scene load_steps=10 format=4 uid="uid://c17yhf6jkkgaw"]
+[gd_scene load_steps=20 format=4 uid="uid://c17yhf6jkkgaw"]
 
 [ext_resource type="Script" path="res://scenes/battle/battle.gd" id="1_3svu6"]
 [ext_resource type="Texture2D" uid="uid://bigcujb6hu1du" path="res://assets/art/tiles/128x128Purple.png" id="2_hmvep"]
 [ext_resource type="PackedScene" uid="uid://dnxjoc6ucoi4o" path="res://controllers/tile_controller.tscn" id="2_kp1bt"]
+[ext_resource type="PackedScene" uid="uid://b5rn0htifxlfx" path="res://scenes/ui/unit_pool/unit_pool_opener.tscn" id="3_eyj0x"]
+[ext_resource type="PackedScene" uid="uid://ign1nfuln6yc" path="res://scenes/unit_pool/unit_pool.tscn" id="3_mtxiy"]
 [ext_resource type="Texture2D" uid="uid://y3awoqs2hp6y" path="res://assets/art/tiles/128x128BoxCursor.png" id="3_q70qf"]
+[ext_resource type="Script" path="res://scenes/unit_pool/unit_pool.gd" id="4_3rl5q"]
+[ext_resource type="Texture2D" uid="uid://qmedylfa8kat" path="res://assets/temp_free_assets/flask_full.png" id="4_a0kk1"]
+[ext_resource type="Texture2D" uid="uid://4ogxfxwdv3pl" path="res://assets/temp_free_assets/flask_empty.png" id="5_jqit8"]
+[ext_resource type="Resource" uid="uid://c3jrwoyob6s72" path="res://resources/unit_pools/filled_potion_unit_pool.tres" id="5_r0xq4"]
 [ext_resource type="PackedScene" uid="uid://bpjynk36iw565" path="res://scenes/unit/unit.tscn" id="5_wh15s"]
+[ext_resource type="Resource" uid="uid://5isisnr3hxnd" path="res://resources/unit_pools/empty_potion_unit_pool.tres" id="6_1ha5k"]
 [ext_resource type="Resource" uid="uid://dgxi5obo1gti8" path="res://resources/units/round_potion.tres" id="6_g1ga3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_taua1"]
@@ -22,12 +29,56 @@ tile_size = Vector2i(128, 128)
 sources/1 = SubResource("TileSetAtlasSource_taua1")
 sources/2 = SubResource("TileSetAtlasSource_qgmjy")
 
+[sub_resource type="Gradient" id="Gradient_vd4x0"]
+offsets = PackedFloat32Array(0.136792, 1)
+colors = PackedColorArray(0.162066, 0.162066, 0.162066, 1, 0.0751355, 0.198349, 0.290421, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8g6mn"]
+gradient = SubResource("Gradient_vd4x0")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1oa0h"]
+font_size = 24
+
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_3svu6")
 
 [node name="TileController" parent="." node_paths=PackedStringArray("ground_layer", "mouse_layer") instance=ExtResource("2_kp1bt")]
 ground_layer = NodePath("../GroundTileMapLayer")
 mouse_layer = NodePath("../MouseTileMapLayer")
+
+[node name="UnitPool" parent="." node_paths=PackedStringArray("filled_unit_pool_opener", "empty_unit_pool_opener") instance=ExtResource("3_mtxiy")]
+position = Vector2(327, 135)
+script = ExtResource("4_3rl5q")
+filled_unit_pool_opener = NodePath("../UI/UnitPoolButtonContainer/FilledUnitPoolOpener")
+empty_unit_pool_opener = NodePath("../UI/UnitPoolButtonContainer/EmptyUnitPoolOpener")
+
+[node name="GroundTileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(145, 247)
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAQAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAIAAAAAQAAAAAAAAABAAEAAQAAAAAAAAABAAIAAQAAAAAAAAABAAMAAQAAAAAAAAABAAQAAQAAAAAAAAACAAQAAQAAAAAAAAACAAMAAQAAAAAAAAACAAIAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAADAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAAEAAMAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAFAAMAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAGAAMAAQAAAAAAAAAGAAIAAQAAAAAAAAAGAAEAAQAAAAAAAAAHAAEAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAHAAQAAQAAAAAAAAAIAAQAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAIAAQAAAAAAAAAIAAEAAQAAAAAAAAAAAAUAAQAAAAAAAAABAAUAAQAAAAAAAAACAAUAAQAAAAAAAAADAAUAAQAAAAAAAAAEAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAHAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_31xrg")
+metadata/_edit_lock_ = true
+
+[node name="MouseTileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(145, 247)
+tile_set = SubResource("TileSet_31xrg")
+metadata/_edit_lock_ = true
+
+[node name="Unit" parent="." instance=ExtResource("5_wh15s")]
+position = Vector2(721, 566)
+stats = ExtResource("6_g1ga3")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -99
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_8g6mn")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -50,17 +101,53 @@ vertical_alignment = 1
 layout_mode = 2
 text = "Return to Map"
 
-[node name="GroundTileMapLayer" type="TileMapLayer" parent="."]
-position = Vector2(145, 247)
-tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAQAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAIAAAAAQAAAAAAAAABAAEAAQAAAAAAAAABAAIAAQAAAAAAAAABAAMAAQAAAAAAAAABAAQAAQAAAAAAAAACAAQAAQAAAAAAAAACAAMAAQAAAAAAAAACAAIAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAADAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAAEAAMAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAFAAMAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAGAAMAAQAAAAAAAAAGAAIAAQAAAAAAAAAGAAEAAQAAAAAAAAAHAAEAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAHAAQAAQAAAAAAAAAIAAQAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAIAAQAAAAAAAAAIAAEAAQAAAAAAAAAAAAUAAQAAAAAAAAABAAUAAQAAAAAAAAACAAUAAQAAAAAAAAADAAUAAQAAAAAAAAAEAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAHAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAA=")
-tile_set = SubResource("TileSet_31xrg")
-metadata/_edit_lock_ = true
+[node name="UnitPoolButtonContainer" type="VBoxContainer" parent="UI"]
+offset_left = 150.0
+offset_top = 70.0
+offset_right = 150.0
+offset_bottom = 70.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 10
 
-[node name="MouseTileMapLayer" type="TileMapLayer" parent="."]
-position = Vector2(145, 247)
-tile_set = SubResource("TileSet_31xrg")
-metadata/_edit_lock_ = true
+[node name="FilledUnitPoolOpener" parent="UI/UnitPoolButtonContainer" node_paths=PackedStringArray("counter") instance=ExtResource("3_eyj0x")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("4_a0kk1")
+ignore_texture_size = true
+stretch_mode = 5
+counter = NodePath("Counter")
+unit_pool = ExtResource("5_r0xq4")
 
-[node name="Unit" parent="." instance=ExtResource("5_wh15s")]
-position = Vector2(210, 308)
-stats = ExtResource("6_g1ga3")
+[node name="Counter" type="Label" parent="UI/UnitPoolButtonContainer/FilledUnitPoolOpener"]
+layout_mode = 0
+offset_left = -15.0
+offset_top = 1.0
+offset_right = 25.0
+offset_bottom = 35.0
+text = "99"
+label_settings = SubResource("LabelSettings_1oa0h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EmptyUnitPoolOpener" parent="UI/UnitPoolButtonContainer" node_paths=PackedStringArray("counter") instance=ExtResource("3_eyj0x")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("5_jqit8")
+ignore_texture_size = true
+stretch_mode = 5
+counter = NodePath("Counter")
+unit_pool = ExtResource("6_1ha5k")
+
+[node name="Counter" type="Label" parent="UI/UnitPoolButtonContainer/EmptyUnitPoolOpener"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 2.0
+offset_right = 24.0
+offset_bottom = 36.0
+text = "99"
+label_settings = SubResource("LabelSettings_1oa0h")
+horizontal_alignment = 1
+vertical_alignment = 1

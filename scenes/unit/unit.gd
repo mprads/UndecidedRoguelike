@@ -10,7 +10,7 @@ func _ready() -> void:
 	if not stats:
 		return
 	
-	sprite_2d.texture = stats.sprite
+	sprite_2d.texture = stats.art
 
 
 func _set_stats(value: UnitStats) -> void:

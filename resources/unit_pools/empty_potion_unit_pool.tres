@@ -6,4 +6,4 @@
 
 [resource]
 script = ExtResource("1_d0y5v")
-unit_pool = Array[ExtResource("2_14d45")]([ExtResource("3_1msni"), ExtResource("3_1msni"), ExtResource("3_1msni")])
+units = Array[ExtResource("2_14d45")]([ExtResource("3_1msni"), ExtResource("3_1msni"), ExtResource("3_1msni")])

@@ -1,7 +1,9 @@
 extends Resource
 class_name UnitPool
 
-@export var unit_pool: Array[UnitStats] = []
+signal unit_pool_sized_changed(units_amount: int)
+
+@export var units: Array[UnitStats] = []
 
 
 func add_unit(unit: UnitStats) -> void:
@@ -9,11 +11,13 @@ func add_unit(unit: UnitStats) -> void:
 		return
 	
 	unit = unit.duplicate()
-	unit_pool.append(unit)
+	units.append(unit)
+	unit_pool_sized_changed.emit(units.size())
 
 
 func remove_unit(unit: UnitStats) -> void:
 	if not unit:
 		return
 
-	unit_pool.erase(unit)
+	units.erase(unit)
+	unit_pool_sized_changed.emit(units.size())

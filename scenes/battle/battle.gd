@@ -1,4 +1,5 @@
 extends Node2D
+class_name Battle
 
 @onready var button: Button = $UI/VBoxContainer/Button
 
